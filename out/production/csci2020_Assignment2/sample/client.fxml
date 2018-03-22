@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<!--
+main.fxml
+
+This file contains the user interface for this application.
+-->
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <top>
+        <HBox>
+            <Button fx:id="downloadButton" text="Download" onAction="#OnDownload"/>
+            <Button fx:id="uploadButton" text="Upload" onAction="#OnUpload"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.15">
+            <items>
+                <ListView fx:id="localFiles" minWidth="200" styleClass="code" />
+                <ListView fx:id="serverFiles" minWidth="200" styleClass="code" />
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>
