@@ -3,5 +3,10 @@ This is an assignment for our class in CSCI2020u
 
 # Main Contributors
 Mir Afgan Talpur
-
 Etienne Caronan
+
+# How to run
+1. Download all the files and open on IntelliJ
+2. Go to Edit Configuration
+3. In the "Arguments" field, write your arguments, separated by spaces (ComputerName SharedFolderPath)
+4. Run Program
