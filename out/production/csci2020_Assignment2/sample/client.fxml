@@ -21,8 +21,8 @@ This file contains the user interface for this application.
     <center>
         <SplitPane dividerPositions="0.15">
             <items>
-                <ListView fx:id="localFiles" minWidth="200" styleClass="code" />
-                <ListView fx:id="serverFiles" minWidth="200" styleClass="code" />
+                <ListView fx:id="localFiles" minWidth="275" styleClass="code" />
+                <ListView fx:id="serverFiles" minWidth="275" styleClass="code" />
             </items>
         </SplitPane>
     </center>
