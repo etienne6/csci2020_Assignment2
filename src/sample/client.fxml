@@ -11,7 +11,7 @@ main.fxml
 
 This file contains the user interface for this application.
 -->
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <top>
         <HBox>
             <Button fx:id="downloadButton" text="Download" onAction="#OnDownload"/>

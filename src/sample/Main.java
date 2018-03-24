@@ -21,14 +21,17 @@ public class Main extends Application {
         computerName = parameters.get(0);
         sharedFolder = parameters.get(1);
 
-        System.out.println(computerName);
-        System.out.println(sharedFolder);
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
-        Parent root = (Parent)loader.load();
-        Controller controller = (Controller)loader.getController();
-        controller.setSharedFolder(sharedFolder);
+        // Create a controller instance
+        Controller controller = new Controller(sharedFolder);
 
+        // Set it in the FXMLLoader
+        loader.setController(controller);
+
+
+        //Controller controller = (Controller)loader.getController();
+        //controller.setSharedFolder(sharedFolder);
+        Parent root = (Parent)loader.load();
         primaryStage.setTitle("File Sharer v1.0");
         primaryStage.setScene(new Scene(root, 550, 500));
         primaryStage.show();
