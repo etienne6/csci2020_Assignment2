@@ -29,9 +29,12 @@ public class Controller {
     @FXML
     private Button uploadButton;
     public String sharedFolder;
+    public String computerName;
     // bring shared folder path from Main file
-    public Controller (String sharedFolder){
+    public Controller (String computerName, String sharedFolder){
+        this.computerName = computerName;
         this.sharedFolder = sharedFolder;
+        System.out.println("The Computer Name is: " + computerName);
         System.out.println("The Shared Folder is: " + sharedFolder);
     }
 
@@ -58,7 +61,7 @@ public class Controller {
                     String FileName = item;
                     System.out.println(item);
                     File file = new File(FileName);
-                    String path = file.getAbsolutePath();
+                    String localPath = file.getAbsolutePath();
                 }
             }
         });
@@ -71,7 +74,7 @@ public class Controller {
                     System.out.println(item);
                     System.out.println(item);
                     File file = new File(FileName);
-                    String path = file.getAbsolutePath();
+                    String serverPath = file.getAbsolutePath();
                 }
             }
         });
@@ -135,15 +138,29 @@ public class Controller {
         // serverFiles.setItems(serverFilesList);
     }
 
-    public void connectToServer(){
+    public void connectServer(){
         try {
             // implement how to connect to server
+            System.out.println("Server: Waiting for client....");
             ServerSocket serverSocket = new ServerSocket(8080);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                ViewFiles();
-                clientSocket.close();
+                System.out.println("Server: Connection Established");
+                connectClient();
+                //ViewFiles();
+               // clientSocket.close();
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void connectClient(){
+        try {
+            // implement how to connect to client
+            System.out.println("Client: Client Started");
+            Socket clientSocket = new Socket("127.0.0.1", 8080);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

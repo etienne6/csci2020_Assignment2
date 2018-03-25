@@ -23,7 +23,7 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
         // Create a controller instance
-        Controller controller = new Controller(sharedFolder);
+        Controller controller = new Controller(computerName,sharedFolder);
 
         // Set it in the FXMLLoader
         loader.setController(controller);
