@@ -1,5 +1,7 @@
 package sample;
 
+import com.sun.deploy.util.StringUtils;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 // keep this: fx:controller="sample.Controller"
 
@@ -28,6 +31,8 @@ public class Controller {
     private Button downloadButton;
     @FXML
     private Button uploadButton;
+    @FXML
+    private Button commandButton;
     public String sharedFolder;
     public String computerName;
     // bring shared folder path from Main file
@@ -128,6 +133,52 @@ public class Controller {
     }
 
     public void OnUpload(ActionEvent actionEvent) {
+
+    }
+
+    public void OnCommand(ActionEvent actionEvent) {
+        System.out.println("Please Enter Your Command (DIR | UPLOAD filename | DOWNLOAD filename): ");
+        Scanner input = new Scanner(System.in);
+        String command = input.nextLine();
+
+        // respond to appropriate command
+        if(command.startsWith("DIR")){
+            // print statement just for debugging
+            System.out.println("You entered the DIR command");
+
+        } else if (command.startsWith("UPLOAD")) {
+            // print statement just for debugging
+            System.out.println("You entered the UPLOAD command");
+
+            // remove the command so we can find the filename
+            String filename  = command.replace("UPLOAD ", "\\");
+            // add the folder path to filename
+            filename = sharedFolder + filename;
+            System.out.println("Filename: " + filename);
+
+            // print contents of entered text file
+            try {
+                BufferedReader in = new BufferedReader(new FileReader(filename));
+                String line = in.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    line = in.readLine();
+                }
+                in.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else if (command.startsWith("DOWNLOAD")) {
+            // print statement just for debugging
+            System.out.println("You entered the DOWNLOAD command");
+
+            // remove the command so we can find the filename
+            String filename  = command.replace("DOWNLOAD ", "");
+            System.out.println("Filename: " + filename);
+        } else {
+            System.out.println("Please try again and enter a valid command.");
+        }
 
     }
 
