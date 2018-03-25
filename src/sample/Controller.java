@@ -1,7 +1,5 @@
 package sample;
-
-import com.sun.deploy.util.StringUtils;
-import com.sun.org.apache.xpath.internal.SourceTree;
+//import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -189,6 +187,8 @@ public class Controller {
         // serverFiles.setItems(serverFilesList);
     }
 
+    //Afgan's client/server stuff. Keeping it for reference while working on the client/server stuff is unfinished
+    /*
     public void connectServer(){
         try {
             // implement how to connect to server
@@ -216,7 +216,7 @@ public class Controller {
             throw new RuntimeException(e);
         }
 
-    }
+    }*/
 
     public void refresh(){
         // implement to refresh file lists once we upload/download

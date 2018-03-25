@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.net.Socket;
 import java.util.List;
 
 public class Main extends Application {
@@ -38,6 +40,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        try {
+            Socket soc = new Socket("localhost", 8080);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         Application.launch(args);
     }
 }
