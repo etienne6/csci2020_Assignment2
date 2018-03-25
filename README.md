@@ -11,8 +11,9 @@ Etienne Caronan
 3. In the "Arguments" field, write your arguments, separated by spaces (ComputerName C:\Users\yourUserName\Documents). First should be computer name, second should be full path to your specified folder.
 4. Run Program
 
-#Client and Server
-*Note: The client server in this current update is pretty prudent stuff.
+# Client and Server
+
+* Note: The client server in this current update is pretty prudent stuff.
 
 How to run:
 1. Go to server.java and right click the main class and click on run
