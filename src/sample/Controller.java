@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
-import java.io.File;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class Controller {
     @FXML
     private Button uploadButton;
     public String sharedFolder;
-
+    // bring shared folder path from Main file
     public Controller (String sharedFolder){
         this.sharedFolder = sharedFolder;
         System.out.println("The Shared Folder is: " + sharedFolder);
@@ -36,6 +39,8 @@ public class Controller {
     public void initialize(){
         // set sharedFolderPath as the one from command line
         String sharedFolderPath = sharedFolder;
+       // connect to the server (still working on function)
+       // connectToServer();
         // create Observable List of files from specified folder
         ObservableList<String> localFileList = getFiles(sharedFolderPath);
         // create Observable List of files from specified folder
@@ -116,9 +121,33 @@ public class Controller {
     }
 
     public void OnDownload(ActionEvent actionEvent) {
+
     }
 
     public void OnUpload(ActionEvent actionEvent) {
+
+    }
+
+    public void ViewFiles(){
+        // create Observable List of files from specified folder
+        // ObservableList<String> serverFilesList = getServerFiles(sharedFolderPath);
+        // add observable list of files to ListView
+        // serverFiles.setItems(serverFilesList);
+    }
+
+    public void connectToServer(){
+        try {
+            // implement how to connect to server
+            ServerSocket serverSocket = new ServerSocket(8080);
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                ViewFiles();
+                clientSocket.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void refresh(){
