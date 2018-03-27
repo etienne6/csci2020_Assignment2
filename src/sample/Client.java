@@ -37,9 +37,10 @@ public class Client {
         try {
             System.out.println("Client: Client Started");
             Socket s = new Socket(computerName, socketNumber);
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-            listenforInput();
+            // uncomment these lines out
+            //din = new DataInputStream(s.getInputStream());
+            //dout = new DataOutputStream(s.getOutputStream());
+            //listenforInput();
         } catch(UnknownHostException e){
             e.printStackTrace();
         } catch(IOException e){

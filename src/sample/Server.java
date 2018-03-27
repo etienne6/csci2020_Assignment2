@@ -21,7 +21,7 @@ public class Server {
     ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     boolean shouldRun = true;
 
-    public Server() {
+    public Server(int i) {
         setComputerName("127.0.0.1");
         setComputerName(".");
     }
@@ -36,13 +36,9 @@ public class Server {
             ss = new ServerSocket(socketNumber);
             while (shouldRun) {
                 System.out.println("Looking for client");
-
-                Socket s = ss.accept();
-                System.out.println("Connection Established");
-                ServerConnection sc = new ServerConnection(s, this);
+                ServerConnection sc = new ServerConnection(ss.accept());
                 sc.start();
-                connections.add(sc);
-                ss.close();
+                System.out.println("Connection Established");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -85,6 +81,11 @@ public class Server {
 
     public void setSharedFolder(String sharedFolder) {
         this.sharedFolder = sharedFolder;
+    }
+
+    public static void main(String args[]){
+        Server server = new Server(8080);
+        server.Connect();
     }
 
 }

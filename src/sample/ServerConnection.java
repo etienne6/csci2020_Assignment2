@@ -8,35 +8,18 @@ import java.net.Socket;
 public class ServerConnection extends Thread {
 
     Socket socket;
-    DataInputStream din;
-    DataOutputStream dout;
     boolean shouldRun = true;
 
-    public ServerConnection(Socket socket, Server server){
-        super("ServerConnectionThread");
+    public ServerConnection(Socket socket){
+        super();
         this.socket = socket;
     }
 
     public void run(){
+        //under the run file is where we will put the commmand stuff!!
         try {
-            din = new DataInputStream(socket.getInputStream());
-            dout = new DataOutputStream(socket.getOutputStream());
-
-            while(shouldRun){
-                while(din.available() == 0){
-                    try {
-                        Thread.sleep(1);
-                    }catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            din.close();
-            dout.close();
             socket.close();
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -25,12 +25,12 @@ public class Main extends Application {
 
         if (computerName == null || sharedFolder == null){
             new Client();
-            new Server();
+            //new Server();
         } else {
-            Server server = new Server(computerName, sharedFolder);
-            //server.Connect();
-            Client client = new Client(computerName, sharedFolder);
-            //client.Connect();
+              //Server server = new Server(computerName, sharedFolder);
+              //server.Connect();
+              Client client = new Client(computerName, sharedFolder);
+              client.Connect();
 
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
