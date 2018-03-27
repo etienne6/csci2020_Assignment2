@@ -1,25 +1,15 @@
 package sample;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+        import javafx.application.Application;
+        import javafx.fxml.FXMLLoader;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
+        import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.List;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.Scanner;
+        import java.net.Socket;
+        import java.util.List;
 
 public class Main extends Application {
-
-    static Socket s;
-    static DataInputStream din;
-    static DataOutputStream dout;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -33,6 +23,16 @@ public class Main extends Application {
         computerName = parameters.get(0);
         sharedFolder = parameters.get(1);
 
+        if (computerName == null || sharedFolder == null){
+            new Client();
+            new Server();
+        } else {
+            Server server = new Server(computerName, sharedFolder);
+            //server.Connect();
+            Client client = new Client(computerName, sharedFolder);
+            //client.Connect();
+
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
         // Create a controller instance
         Controller controller = new Controller(computerName,sharedFolder);
@@ -50,55 +50,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        new Client();
         Application.launch(args);
-    }
-    public static class Client{
-        public Client(){
-            try {
-                s = new Socket("localhost", 3333);
-                din = new DataInputStream(s.getInputStream());
-                dout = new DataOutputStream(s.getOutputStream());
-
-                listenforInput();
-            } catch(UnknownHostException e){
-                e.printStackTrace();
-            } catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void listenforInput(){
-        Scanner console = new Scanner(System.in);
-        while(true){
-            while(!console.hasNext()){
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                String input = console.nextLine();
-
-                try {
-                    dout.writeUTF(input);
-
-                    while(din.available() == 0){
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    String reply = din.readUTF();
-                    System.out.println(reply);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    break;
-                }
-            }
-        }
     }
 }
