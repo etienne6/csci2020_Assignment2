@@ -109,52 +109,6 @@ public class Controller {
 
     }
 
-    public void OnCommand(ActionEvent actionEvent) {
-        System.out.println("Please Enter Your Command (DIR | UPLOAD filename | DOWNLOAD filename): ");
-        Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
-
-        // respond to appropriate command
-        if(command.startsWith("DIR")){
-            // print statement just for debugging
-            System.out.println("You entered the DIR command");
-
-        } else if (command.startsWith("UPLOAD")) {
-            // print statement just for debugging
-            System.out.println("You entered the UPLOAD command");
-
-            // remove the command so we can find the filename
-            String filename  = command.replace("UPLOAD ", "\\");
-            // add the folder path to filename
-            filename = sharedFolder + filename;
-            System.out.println("Filename: " + filename);
-
-            // print contents of entered text file
-            try {
-                BufferedReader in = new BufferedReader(new FileReader(filename));
-                String line = in.readLine();
-                while (line != null) {
-                    System.out.println(line);
-                    line = in.readLine();
-                }
-                in.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        } else if (command.startsWith("DOWNLOAD")) {
-            // print statement just for debugging
-            System.out.println("You entered the DOWNLOAD command");
-
-            // remove the command so we can find the filename
-            String filename  = command.replace("DOWNLOAD ", "");
-            System.out.println("Filename: " + filename);
-        } else {
-            System.out.println("Please try again and enter a valid command.");
-        }
-
-    }
-
     public void ViewFiles(){
         // create Observable List of files from specified folder
         // ObservableList<String> serverFilesList = getServerFiles(sharedFolderPath);

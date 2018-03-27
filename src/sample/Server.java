@@ -13,7 +13,7 @@ package sample;
 
 public class Server {
 
-    public int socketNumber = 8080;
+    public int socketNumber;
     private String computerName;
     private String sharedFolder;
 
@@ -21,14 +21,16 @@ public class Server {
     ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     boolean shouldRun = true;
 
-    public Server(int i) {
+    public Server() {
         setComputerName("127.0.0.1");
-        setComputerName(".");
+        setSharedFolder(".");
+        setSocketNumber(8080);
     }
 
-    public Server(String computerName, String sharedFolder) {
+    public Server(String computerName, String sharedFolder, int socketNumber) {
         this.computerName = computerName;
         this.sharedFolder = sharedFolder;
+        this.socketNumber = socketNumber;
     }
 
     public void Connect() {
@@ -36,7 +38,7 @@ public class Server {
             ss = new ServerSocket(socketNumber);
             while (shouldRun) {
                 System.out.println("Looking for client");
-                ServerConnection sc = new ServerConnection(ss.accept());
+                ServerConnection sc = new ServerConnection(computerName, sharedFolder, ss.accept());
                 sc.start();
                 System.out.println("Connection Established");
             }
@@ -67,24 +69,30 @@ public class Server {
         return files;
     }
 
-    public String getComputerName() {
-        return this.computerName;
-    }
-
     public void setComputerName(String computerName) {
         this.computerName = computerName;
-    }
-
-    public String getSharedFolder() {
-        return this.sharedFolder;
     }
 
     public void setSharedFolder(String sharedFolder) {
         this.sharedFolder = sharedFolder;
     }
 
+    public void setSocketNumber(int socketNumber) {
+        this.socketNumber = socketNumber;
+    }
+
     public static void main(String args[]){
-        Server server = new Server(8080);
+        String computerName;
+        String sharedFolder;
+
+        computerName = args[0];
+        sharedFolder = args[1];
+
+        System.out.println(computerName);
+
+        System.out.println(sharedFolder);
+
+        Server server = new Server(computerName, sharedFolder, 8080);
         server.Connect();
     }
 
