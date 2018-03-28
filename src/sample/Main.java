@@ -6,6 +6,7 @@ package sample;
         import javafx.scene.Scene;
         import javafx.stage.Stage;
 
+        import java.io.File;
         import java.net.Socket;
         import java.util.List;
 
@@ -28,6 +29,11 @@ public class Main extends Application {
 
         serverSharedFolder = sharedFolder + sep + "ServerSharedFolder";
         System.out.println(serverSharedFolder);
+
+        File directory = new File(serverSharedFolder);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
 
         if (computerName == null || sharedFolder == null){
             new Client();
