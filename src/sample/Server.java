@@ -40,7 +40,7 @@ public class Server {
             ss = new ServerSocket(socketNumber);
             while (shouldRun) {
                 System.out.println("Looking for client");
-                ServerConnection sc = new ServerConnection(computerName, sharedFolder, ss.accept());
+                ServerConnection sc = new ServerConnection(computerName, sharedFolder, serverSharedFolder, ss.accept());
                 System.out.println("Connection Established");
                 sc.run();
             }
