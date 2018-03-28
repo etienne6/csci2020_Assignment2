@@ -29,11 +29,13 @@ public class Controller {
     private Button commandButton;
     //enter your own filepath
     public String sharedFolder;
-    public String computerName = "127.0.0.1";
+    public String computerName;
+    public String serverSharedFolder;
     // bring shared folder path from Main file
-    public Controller (String computerName, String sharedFolder){
+    public Controller (String computerName, String sharedFolder, String serverSharedFolder){
         this.computerName = computerName;
         this.sharedFolder = sharedFolder;
+        this.serverSharedFolder = serverSharedFolder;
         System.out.println("The Computer Name is: " + computerName);
         System.out.println("The Shared Folder is: " + sharedFolder);
     }
@@ -46,7 +48,7 @@ public class Controller {
 
         ObservableList<String> localFileList = Client.getFiles(sharedFolder);
         // create Observable List of files from specified folder
-        ObservableList<String> serverFilesList = Server.getServerFiles(sharedFolder);
+        ObservableList<String> serverFilesList = Server.getServerFiles(serverSharedFolder);
         // add observable list of files to ListView
         localFiles.setItems(localFileList);
         // add observable list of files to ListView

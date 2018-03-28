@@ -15,6 +15,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         String computerName;
         String sharedFolder;
+        String serverSharedFolder;
+        String sep = System.getProperty("file.separator");
 
         // take in computer name and shared folder as command line arguments
         Parameters params = getParameters();
@@ -22,6 +24,10 @@ public class Main extends Application {
 
         computerName = parameters.get(0);
         sharedFolder = parameters.get(1);
+
+
+        serverSharedFolder = sharedFolder + sep + "ServerSharedFolder";
+        System.out.println(serverSharedFolder);
 
         if (computerName == null || sharedFolder == null){
             new Client();
@@ -35,7 +41,7 @@ public class Main extends Application {
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
         // Create a controller instance
-        Controller controller = new Controller(computerName,sharedFolder);
+        Controller controller = new Controller(computerName,sharedFolder,serverSharedFolder);
 
         // Set it in the FXMLLoader
         loader.setController(controller);

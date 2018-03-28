@@ -16,6 +16,7 @@ public class Server {
     public int socketNumber;
     private String computerName;
     private String sharedFolder;
+    private String serverSharedFolder;
 
     ServerSocket ss;
     ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
@@ -27,9 +28,10 @@ public class Server {
         setSocketNumber(8080);
     }
 
-    public Server(String computerName, String sharedFolder, int socketNumber) {
+    public Server(String computerName, String sharedFolder, String serverSharedFolder, int socketNumber) {
         this.computerName = computerName;
         this.sharedFolder = sharedFolder;
+        this.serverSharedFolder = serverSharedFolder;
         this.socketNumber = socketNumber;
     }
 
@@ -84,15 +86,28 @@ public class Server {
     public static void main(String args[]){
         String computerName;
         String sharedFolder;
+        String serverSharedFolder;
+        String sep = System.getProperty("file.separator");
 
         computerName = args[0];
         sharedFolder = args[1];
+
+
+        serverSharedFolder = sharedFolder + sep + "ServerSharedFolder";
+        System.out.println(serverSharedFolder);
+
+
+        File directory = new File(serverSharedFolder);
+        if (! directory.exists()){
+            directory.mkdir();
+
+        }
 
         System.out.println(computerName);
 
         System.out.println(sharedFolder);
 
-        Server server = new Server(computerName, sharedFolder, 8080);
+        Server server = new Server(computerName, sharedFolder, serverSharedFolder, 8080);
         server.Connect();
     }
 
