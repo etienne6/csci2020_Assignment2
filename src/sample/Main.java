@@ -47,9 +47,12 @@ public class Main extends Application {
         primaryStage.setTitle("File Sharer v1.0");
         primaryStage.setScene(new Scene(root, 550, 500));
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
         Application.launch(args);
     }
 }
+

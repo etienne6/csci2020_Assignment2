@@ -27,8 +27,9 @@ public class Controller {
     private Button uploadButton;
     @FXML
     private Button commandButton;
+    //enter your own filepath
     public String sharedFolder;
-    public String computerName;
+    public String computerName = "127.0.0.1";
     // bring shared folder path from Main file
     public Controller (String computerName, String sharedFolder){
         this.computerName = computerName;
@@ -107,6 +108,12 @@ public class Controller {
     public void OnUpload(ActionEvent actionEvent) {
         System.out.println("You have decided to Upload");
 
+    }
+    //connects to the server and allows user to upload/download to server
+    public void OnCommand(ActionEvent actionEvent){
+
+        Client client = new Client(computerName, sharedFolder);
+        client.Connect();
     }
 
     public void ViewFiles(){

@@ -27,4 +27,11 @@ This file contains the user interface for this application.
             </items>
         </SplitPane>
     </center>
+    <bottom>
+        <VBox alignment="CENTER" prefHeight="50" prefWidth="171.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="commandButton" text="Input Command" onAction="#OnCommand"/>
+            </children>
+        </VBox>
+    </bottom>
 </BorderPane>

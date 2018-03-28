@@ -39,8 +39,8 @@ public class Server {
             while (shouldRun) {
                 System.out.println("Looking for client");
                 ServerConnection sc = new ServerConnection(computerName, sharedFolder, ss.accept());
-                sc.start();
                 System.out.println("Connection Established");
+                sc.run();
             }
         }catch(Exception e){
             e.printStackTrace();
