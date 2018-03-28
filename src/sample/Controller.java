@@ -53,6 +53,7 @@ public class Controller {
         localFiles.setItems(localFileList);
         // add observable list of files to ListView
         serverFiles.setItems(serverFilesList);
+
         //
         localFiles.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

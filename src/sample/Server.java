@@ -109,6 +109,8 @@ public class Server {
 
         Server server = new Server(computerName, sharedFolder, serverSharedFolder, 8080);
         server.Connect();
+
+
     }
 
 }
