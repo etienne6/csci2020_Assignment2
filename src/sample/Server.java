@@ -18,6 +18,7 @@ public class Server {
     ServerSocket ss;
     boolean shouldRun = true;
 
+    //Default construct for server class
     public Server() {
         setComputerName("127.0.0.1");
         setSharedFolder(".");
@@ -31,6 +32,11 @@ public class Server {
         this.socketNumber = socketNumber;
     }
 
+    /*
+      The server socket is wrapped around a while loop so it is kept open the entire time the program is running.
+      A thread(ServerConnection) is then instantiated with a socket.
+      Calls run command to execute the thread.
+    */
     public void Connect() {
         try {
             ss = new ServerSocket(socketNumber);

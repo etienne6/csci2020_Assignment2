@@ -1,3 +1,4 @@
+//Thread Class
 package sample;
 
 import javafx.stage.DirectoryChooser;
@@ -18,6 +19,7 @@ public class ServerConnection extends Thread {
     Socket socket = null;
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
+    //Thread constructor, we pass in a Socket because in the run function the socket is called upon to be closed.
     public ServerConnection(String computerName, String sharedFolder, String serverSharedFolder, Socket socket) {
         super();
         this.computerName = computerName;
@@ -26,6 +28,7 @@ public class ServerConnection extends Thread {
         this.socket = socket;
     }
 
+    //Function called upon to execute thread
     public void run() {
         String command;
         String sep = System.getProperty("file.separator");
@@ -120,4 +123,3 @@ public class ServerConnection extends Thread {
         }
     }
 }
-
