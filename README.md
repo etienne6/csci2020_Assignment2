@@ -18,3 +18,4 @@ How to run:
 2. Go under main.java and do the same in step 1
 3. If you check your tabs at the bottom (of Intellij), you will see 2. One being server and the other being main. 
 Click on server. It should say "Connection Established"
+4. To connect to server again and input a command, click the "Input command" button on the UI.
