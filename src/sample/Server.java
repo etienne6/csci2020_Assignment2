@@ -39,7 +39,7 @@ public class Server {
         try {
             ss = new ServerSocket(socketNumber);
             while (shouldRun) {
-                System.out.println("Looking for client");
+                System.out.println("\nLooking for client");
                 ServerConnection sc = new ServerConnection(computerName, sharedFolder, serverSharedFolder, ss.accept());
                 System.out.println("Connection Established");
                 sc.run();
@@ -55,7 +55,6 @@ public class Server {
         DirectoryChooser chooser = new DirectoryChooser();
         File path = new File(pathOfFiles);
         chooser.setInitialDirectory(path);
-        System.out.println(path);
 
         // create array of files from path and add to array list
         File[] filesInDirectory = path.listFiles();

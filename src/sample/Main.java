@@ -7,7 +7,6 @@ package sample;
         import javafx.stage.Stage;
 
         import java.io.File;
-        import java.net.Socket;
         import java.util.List;
 
 public class Main extends Application {
@@ -26,10 +25,10 @@ public class Main extends Application {
         computerName = parameters.get(0);
         sharedFolder = parameters.get(1);
 
-
+        // define shared server folder
         serverSharedFolder = sharedFolder + sep + "ServerSharedFolder";
-        System.out.println(serverSharedFolder);
 
+        // if it doesn't exist, create it
         File directory = new File(serverSharedFolder);
         if (! directory.exists()){
             directory.mkdir();
@@ -37,10 +36,7 @@ public class Main extends Application {
 
         if (computerName == null || sharedFolder == null){
             new Client();
-            //new Server();
         } else {
-              //Server server = new Server(computerName, sharedFolder);
-              //server.Connect();
               Client client = new Client(computerName, sharedFolder);
               client.Connect();
 

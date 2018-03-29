@@ -39,11 +39,7 @@ public class ServerConnection extends Thread {
                 // print statement just for debugging
                 System.out.println("Files in the Server Shared Folder: ");
                 listOfFiles(serverSharedFolder);
-
             } else if (command.startsWith("UPLOAD")) {
-                // print statement just for debugging
-                System.out.println("You entered the UPLOAD command");
-
                 // remove the command so we can find the filename
                 String filename = command.replace("UPLOAD ",sep);
                 // add the folder path to filename
@@ -52,22 +48,15 @@ public class ServerConnection extends Thread {
                 System.out.println("The contents of your file: ");
                 // print contents of entered text file
                 upload(fullFilename, fullOutFileName);
-
             } else if (command.startsWith("DOWNLOAD")) {
-                // print statement just for debugging
-                System.out.println("You entered the DOWNLOAD command");
-
                 // remove the command so we can find the filename
                 String filename = command.replace("DOWNLOAD ", sep);
                 String fullFilename = sharedFolder + filename;
                 String fullOutFileName = serverSharedFolder + filename;
-                System.out.println("Filename: " + filename);
                 download(fullFilename, fullOutFileName);
-
             } else {
                 System.out.println("Please try again and enter a valid command.");
             }
-
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,10 +70,10 @@ public class ServerConnection extends Thread {
             String line = inFile.readLine();
             while (line != null) {
                 System.out.println(line);
+                outFile.write(line);
+                outFile.newLine();
                 line = inFile.readLine();
                 if (line!=null) {
-                    outFile.write(line);
-                    outFile.newLine();
                     outFile.flush();
                 }
             }
@@ -95,16 +84,17 @@ public class ServerConnection extends Thread {
         }
     }
 
+
     public void download(String inputFile, String outputFile) {
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(outputFile));
             BufferedWriter outFile = new BufferedWriter(new FileWriter(inputFile));
             String line = inFile.readLine();
             while (line != null) {
+                outFile.write(line);
+                outFile.newLine();
                 line = inFile.readLine();
-                if (line!=null) {
-                    outFile.write(line);
-                    outFile.newLine();
+                if (line != null) {
                     outFile.flush();
                 }
             }
