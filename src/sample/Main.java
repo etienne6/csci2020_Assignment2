@@ -1,3 +1,8 @@
+/*
+Mir Afgan Talpur
+Etienne Caronan
+ */
+
 package sample;
 
         import javafx.application.Application;
@@ -5,7 +10,6 @@ package sample;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.stage.Stage;
-
         import java.io.File;
         import java.util.List;
 
@@ -34,29 +38,26 @@ public class Main extends Application {
             directory.mkdir();
         }
 
+        // create instance of Client class
         if (computerName == null || sharedFolder == null){
             new Client();
         } else {
-              Client client = new Client(computerName, sharedFolder);
+              Client client = new Client(computerName, sharedFolder, serverSharedFolder);
               client.Connect();
-
         }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
-        // Create a controller instance
+        // Create a controller instance, pass command line arguments as parameters
         Controller controller = new Controller(computerName,sharedFolder,serverSharedFolder);
 
         // Set it in the FXMLLoader
         loader.setController(controller);
 
-
-        //Controller controller = (Controller)loader.getController();
-        //controller.setSharedFolder(sharedFolder);
+        // basic UI for stage
         Parent root = (Parent)loader.load();
         primaryStage.setTitle("File Sharer v1.0");
         primaryStage.setScene(new Scene(root, 550, 500));
         primaryStage.show();
-
-
     }
 
     public static void main(String[] args) {

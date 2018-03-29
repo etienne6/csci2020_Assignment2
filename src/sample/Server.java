@@ -1,13 +1,10 @@
 package sample;
 
-        import javafx.application.Application;
         import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.stage.DirectoryChooser;
-
         import java.io.File;
         import java.net.ServerSocket;
-        import java.net.Socket;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -19,7 +16,6 @@ public class Server {
     private String serverSharedFolder;
 
     ServerSocket ss;
-    ArrayList<ServerConnection> connections = new ArrayList<ServerConnection>();
     boolean shouldRun = true;
 
     public Server() {
@@ -83,28 +79,23 @@ public class Server {
     }
 
     public static void main(String args[]){
+
         String computerName;
         String sharedFolder;
         String serverSharedFolder;
         String sep = System.getProperty("file.separator");
 
+        // get computer name and shared folder path as arguments
         computerName = args[0];
         sharedFolder = args[1];
 
-
+        // create a server folder if it doesn't already exist
         serverSharedFolder = sharedFolder + sep + "ServerSharedFolder";
-        System.out.println(serverSharedFolder);
-
 
         File directory = new File(serverSharedFolder);
         if (! directory.exists()){
             directory.mkdir();
-
         }
-
-        System.out.println(computerName);
-
-        System.out.println(sharedFolder);
 
         Server server = new Server(computerName, sharedFolder, serverSharedFolder, 8080);
         server.Connect();

@@ -4,7 +4,6 @@ import javafx.stage.DirectoryChooser;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class ServerConnection extends Thread {
@@ -36,7 +35,7 @@ public class ServerConnection extends Thread {
             Scanner reader = new Scanner(System.in);
             command = in.readLine();
             if (command.startsWith("DIR")) {
-                // print statement just for debugging
+                // display list of files in server directory
                 System.out.println("Files in the Server Shared Folder: ");
                 listOfFiles(serverSharedFolder);
             } else if (command.startsWith("UPLOAD")) {
@@ -45,14 +44,14 @@ public class ServerConnection extends Thread {
                 // add the folder path to filename
                 String fullFilename = sharedFolder + filename;
                 String fullOutFileName = serverSharedFolder + filename;
-                System.out.println("The contents of your file: ");
-                // print contents of entered text file
+                // copy file from local to server
                 upload(fullFilename, fullOutFileName);
             } else if (command.startsWith("DOWNLOAD")) {
                 // remove the command so we can find the filename
                 String filename = command.replace("DOWNLOAD ", sep);
                 String fullFilename = sharedFolder + filename;
                 String fullOutFileName = serverSharedFolder + filename;
+                // copy file from server to local
                 download(fullFilename, fullOutFileName);
             } else {
                 System.out.println("Please try again and enter a valid command.");
@@ -63,6 +62,7 @@ public class ServerConnection extends Thread {
         }
     }
 
+    // upload function to copy files from local to server if UPLOAD command chosen
     public void upload(String inputFile, String outputFile) {
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(inputFile));
@@ -84,7 +84,7 @@ public class ServerConnection extends Thread {
         }
     }
 
-
+    // download function to copy files from server folder to local if DOWNLOAD command chosen
     public void download(String inputFile, String outputFile) {
         try {
             BufferedReader inFile = new BufferedReader(new FileReader(outputFile));
@@ -105,6 +105,7 @@ public class ServerConnection extends Thread {
         }
     }
 
+    // display list of files if DIR command chosen
     public void listOfFiles(String serverSharedFolder) {
         DirectoryChooser chooser = new DirectoryChooser();
         File path = new File(serverSharedFolder);

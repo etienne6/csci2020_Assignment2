@@ -25,27 +25,23 @@ public class Controller {
     private Button uploadButton;
     @FXML
     private Button commandButton;
-    //enter your own filepath
+
     public String sharedFolder;
     public String computerName;
     public String serverSharedFolder;
     public String FileName;
     String sep = System.getProperty("file.separator");
+
     // bring shared folder path from Main file
     public Controller (String computerName, String sharedFolder, String serverSharedFolder){
         this.computerName = computerName;
         this.sharedFolder = sharedFolder;
         this.serverSharedFolder = serverSharedFolder;
-        System.out.println("The Computer Name is: " + computerName);
-        System.out.println("The Shared Folder is: " + sharedFolder);
     }
 
     @FXML
     public void initialize(){
-        // connect to the server (still working on function)
-        // connectToServer();
         // create Observable List of files from specified folder
-
         ObservableList<String> localFileList = Client.getFiles(sharedFolder);
         // create Observable List of files from specified folder
         ObservableList<String> serverFilesList = Server.getServerFiles(serverSharedFolder);
@@ -54,24 +50,23 @@ public class Controller {
         // add observable list of files to ListView
         serverFiles.setItems(serverFilesList);
 
-        //
+        // get local filename when it is clicked in list view
         localFiles.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getClickCount() == 1) {
                     String item = localFiles.getSelectionModel().getSelectedItem();
-
                     FileName = item;
                     setFileName(FileName);
                 }
             }
         });
+        // get server filename when it is clicked in list view
         serverFiles.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getClickCount() == 1) {
                     String item = serverFiles.getSelectionModel().getSelectedItem();
-
                     FileName = item;
                     setFileName(FileName);
                 }
@@ -79,6 +74,7 @@ public class Controller {
         });
     }
 
+    // when download button is clicked (after file selection through clicking), it will send file over to local folder
     public void OnDownload(ActionEvent actionEvent) {
        try {
         String inputFile = serverSharedFolder + sep + FileName;
@@ -100,14 +96,11 @@ public class Controller {
     } catch (IOException e) {
         System.err.println("IOException while connecting");
     }
+    // refresh after downloading
     initialize();
     }
 
-
-    public void setFileName(String Filename) {
-        this.FileName = FileName;
-    }
-
+    // when upload button is clicked (after file selection through clicking), it will send file over to server folder
     public void OnUpload(ActionEvent actionEvent) {
         try {
             String inputFile = sharedFolder + sep + FileName;
@@ -129,16 +122,15 @@ public class Controller {
         } catch (IOException e) {
             System.err.println("IOException while connecting");
         }
+        // refresh after uploading
         initialize();
     }
-    //connects to the server and allows user to upload/download to server
+
+    // connects to the server and allows user to upload/download to server
     public void OnCommand(ActionEvent actionEvent){
-        Client client = new Client(computerName, sharedFolder);
+        Client client = new Client(computerName, sharedFolder, serverSharedFolder);
         client.Connect();
     }
-
-    public void refresh(){
-        // implement to refresh file lists once we upload/download
-    }
+    public void setFileName(String Filename) { this.FileName = FileName; }
 }
 
